@@ -15,6 +15,7 @@
 		C8B165E2214FB84A002E1FE6 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165E1214FB84A002E1FE6 /* VideoCell.swift */; };
 		C8B165E5214FB8C2002E1FE6 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165E4214FB8C2002E1FE6 /* BaseCell.swift */; };
 		C8B165E821500859002E1FE6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165E721500859002E1FE6 /* Extensions.swift */; };
+		C8B165EB21501D42002E1FE6 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165EA21501D42002E1FE6 /* MenuBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C8B165E1214FB84A002E1FE6 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		C8B165E4214FB8C2002E1FE6 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		C8B165E721500859002E1FE6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C8B165EA21501D42002E1FE6 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			children = (
 				C8B165E1214FB84A002E1FE6 /* VideoCell.swift */,
 				C8B165E4214FB8C2002E1FE6 /* BaseCell.swift */,
+				C8B165EA21501D42002E1FE6 /* MenuBar.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			files = (
 				C8B165E821500859002E1FE6 /* Extensions.swift in Sources */,
 				C8B165E5214FB8C2002E1FE6 /* BaseCell.swift in Sources */,
+				C8B165EB21501D42002E1FE6 /* MenuBar.swift in Sources */,
 				C8B165D1214FA8F6002E1FE6 /* HomeController.swift in Sources */,
 				C8B165CF214FA8F6002E1FE6 /* AppDelegate.swift in Sources */,
 				C8B165E2214FB84A002E1FE6 /* VideoCell.swift in Sources */,

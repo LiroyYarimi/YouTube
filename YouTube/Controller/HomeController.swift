@@ -25,6 +25,23 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
         
         collectionView?.backgroundColor = .white
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)//push the collectionView 50 pixel down for menuBar
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)//push down the scroller view (the vertical line in the right side) because the mune bar
+        
+        setupMenuBar()
+    }
+    
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
+    //create menu bar
+    private func setupMenuBar(){
+        view.addSubview(menuBar)
+        view.addConstraintsWithVisualFormat(format: "H:|[v0]|", views: menuBar)
+        view.addConstraintsWithVisualFormat(format: "V:|[v0(50)]", views: menuBar)
     }
     
     //sizeForItemAt- cell size

@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -26,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))//make the ViewController class to be the root
         
         UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)//change the navigation bar color
+        
+        //delete the shadow under the navigation bar (the black line)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
         //change the status bar color to white. (to make it work we need to create a new line in info.plist. the new line is: View controller-based status bar appearance. and value is NO
         application.statusBarStyle = .lightContent
