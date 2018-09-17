@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		C8B165CF214FA8F6002E1FE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */; };
-		C8B165D1214FA8F6002E1FE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165D0214FA8F6002E1FE6 /* ViewController.swift */; };
+		C8B165D1214FA8F6002E1FE6 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165D0214FA8F6002E1FE6 /* HomeController.swift */; };
 		C8B165D4214FA8F6002E1FE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B165D2214FA8F6002E1FE6 /* Main.storyboard */; };
 		C8B165D6214FA8F7002E1FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8B165D5214FA8F7002E1FE6 /* Assets.xcassets */; };
 		C8B165D9214FA8F7002E1FE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B165D7214FA8F7002E1FE6 /* LaunchScreen.storyboard */; };
+		C8B165E2214FB84A002E1FE6 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165E1214FB84A002E1FE6 /* VideoCell.swift */; };
+		C8B165E5214FB8C2002E1FE6 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165E4214FB8C2002E1FE6 /* BaseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C8B165CB214FA8F6002E1FE6 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C8B165D0214FA8F6002E1FE6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C8B165D0214FA8F6002E1FE6 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		C8B165D3214FA8F6002E1FE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C8B165D5214FA8F7002E1FE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8B165D8214FA8F7002E1FE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8B165DA214FA8F7002E1FE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8B165E1214FB84A002E1FE6 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		C8B165E4214FB8C2002E1FE6 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +59,31 @@
 			isa = PBXGroup;
 			children = (
 				C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */,
-				C8B165D0214FA8F6002E1FE6 /* ViewController.swift */,
+				C8B165D0214FA8F6002E1FE6 /* HomeController.swift */,
+				C8B165E3214FB854002E1FE6 /* Cells */,
+				C8B165E0214FA918002E1FE6 /* Supporting Files */,
+			);
+			path = YouTube;
+			sourceTree = "<group>";
+		};
+		C8B165E0214FA918002E1FE6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				C8B165D2214FA8F6002E1FE6 /* Main.storyboard */,
 				C8B165D5214FA8F7002E1FE6 /* Assets.xcassets */,
 				C8B165D7214FA8F7002E1FE6 /* LaunchScreen.storyboard */,
 				C8B165DA214FA8F7002E1FE6 /* Info.plist */,
 			);
-			path = YouTube;
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C8B165E3214FB854002E1FE6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C8B165E1214FB84A002E1FE6 /* VideoCell.swift */,
+				C8B165E4214FB8C2002E1FE6 /* BaseCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +157,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8B165D1214FA8F6002E1FE6 /* ViewController.swift in Sources */,
+				C8B165E5214FB8C2002E1FE6 /* BaseCell.swift in Sources */,
+				C8B165D1214FA8F6002E1FE6 /* HomeController.swift in Sources */,
 				C8B165CF214FA8F6002E1FE6 /* AppDelegate.swift in Sources */,
+				C8B165E2214FB84A002E1FE6 /* VideoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,7 +306,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BRUZ42SH8K;
-				INFOPLIST_FILE = YouTube/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/YouTube/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,7 +324,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BRUZ42SH8K;
-				INFOPLIST_FILE = YouTube/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/YouTube/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

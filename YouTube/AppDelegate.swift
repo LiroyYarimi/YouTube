@@ -13,9 +13,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //do not forget to delete Main Interface (2018-09-17 13:16:41.725058+0300 YouTube[16738:671344] Unknown class _TtC7YouTube14ViewController in Interface Builder file.)
+
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        let layout = UICollectionViewFlowLayout()//we need this because HomeController inheritance from UICollectionViewController
+        window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))//make the ViewController class to be the root
+
         return true
     }
 
