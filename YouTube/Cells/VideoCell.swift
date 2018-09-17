@@ -13,35 +13,40 @@ class VideoCell: BaseCell {
     
     let thumbnailImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .blue
         imageView.image = UIImage(named: "taylor_swift_blank_space")
+        imageView.contentMode = .scaleAspectFill //keep the image not stretching
+        imageView.clipsToBounds = true //keep the image in the cell and not overing.
         return imageView
     }()
     
     //line between cell
     let separatorView : UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         return view
     }()
     
     let userProfileImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .green
+        imageView.image = UIImage(named: "taylor_swift_profile")
+        imageView.layer.cornerRadius = 22 //we want round image so if the image size is 44x44 so lets round it by half(22).
+        imageView.layer.masksToBounds = true //for the round corners
         return imageView
     }()
     
     let titleLabel : UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.purple
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Taylor Swift - Blank Space"
         return label
     }()
     
     let subtitleTextView : UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .red
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years ago"
+        textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)//the text have default 4 pixel to the right so we delete it
+        textView.textColor = UIColor.lightGray
         return textView
     }()
     
@@ -82,31 +87,16 @@ class VideoCell: BaseCell {
     func constraintSubtitleTextView(){
         
         //top constraint
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 4))
         //left constraint
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
         //right constraint
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         //height constraint
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
     }
 }
 
 
 
-extension UIView{
-    func addConstraintsWithVisualFormat(format: String, views: UIView...){
-        
-        var viewsDictionary = [String: UIView]()
-        for (index,view) in views.enumerated(){
-            let key = "v\(index)"
-            view.translatesAutoresizingMaskIntoConstraints = false
-            viewsDictionary[key] = view
-        }
-        
-        
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-        
-        
-    }
-}
+

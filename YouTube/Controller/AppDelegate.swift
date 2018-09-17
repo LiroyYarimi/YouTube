@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -23,6 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let layout = UICollectionViewFlowLayout()//we need this because HomeController inheritance from UICollectionViewController
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))//make the ViewController class to be the root
+        
+        UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)//change the navigation bar color
+        
+        //change the status bar color to white. (to make it work we need to create a new line in info.plist. the new line is: View controller-based status bar appearance. and value is NO
+        application.statusBarStyle = .lightContent
+        
+        //change the status bar background color. To do it we create UIView and change his background color
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
+        
+        //add this statusBarBackgroundView to our window at the top
+        window?.addSubview(statusBarBackgroundView)
+        window?.addConstraintsWithVisualFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
+        window?.addConstraintsWithVisualFormat(format: "V:|[v0(20)]", views: statusBarBackgroundView)
 
         return true
     }
