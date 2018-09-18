@@ -30,12 +30,37 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)//push down the scroller view (the vertical line in the right side) because the mune bar
         
         setupMenuBar()
+        setupNavBarButtons()
     }
     
     let menuBar: MenuBar = {
         let mb = MenuBar()
         return mb
     }()
+    
+    //search button and three points button
+    func setupNavBarButtons(){
+        
+        //search bar button
+        let searchImage = UIImage(named: "search_icon")?.withRenderingMode(.alwaysOriginal)//make the search bar white
+        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
+        
+        //more bar button (3 points)
+        let moreButton = UIBarButtonItem(image: UIImage(named: "nav_more_icon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
+        
+        navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]//rightBarButtonItems with 's' in the end!!
+
+    }
+    
+    //this func call when user press on more button (3 points)
+    @objc func handleMore(){
+        print("more button is pressed")
+    }
+    
+    //this func call when user press on search button
+    @objc func handleSearch(){
+        print("search button is pressed")
+    }
     
     //create menu bar
     private func setupMenuBar(){
