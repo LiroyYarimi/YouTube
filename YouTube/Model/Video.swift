@@ -10,9 +10,20 @@ import UIKit
 
 class Video: NSObject {
     
+    var thumbnailImageName: String? //the main image in video cell
+    var title: String?
+    var numberOfViews : NSNumber?
+    var uploadData: NSData?
+    
+    var channel: Channel?
     
     
     
+}
+
+class Channel: NSObject {
     
+    var name: String?
+    var profileImageName : String?
     
 }

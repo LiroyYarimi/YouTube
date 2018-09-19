@@ -9,6 +9,28 @@
 import UIKit
 
 class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowLayout{
+    
+    var videos: [Video] = {
+        
+        var kanyeChannel = Channel()
+        kanyeChannel.name = "KanyeIsTheBestChannel"
+        kanyeChannel.profileImageName = "kanye_profile"
+        
+        var blackSpaceVideo = Video()
+        blackSpaceVideo.title = "Taylor Swift - Blank Space"
+        blackSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
+        blackSpaceVideo.channel = kanyeChannel
+        blackSpaceVideo.numberOfViews = 42543534533432423
+        
+        
+        var badBloodVideo = Video()
+        badBloodVideo.title = "Taylor Swift - Bad Blood featuring Kendrick Lamar"
+        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
+        badBloodVideo.channel = kanyeChannel
+        badBloodVideo.numberOfViews = 4423423566632
+        
+        return [blackSpaceVideo,badBloodVideo]
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +95,7 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         var height = (view.frame.width - 16 - 16) * 9 / 16 // we want shape of 16x9
-        height += 16 + 68 // for the title and profile image
+        height += 16 + 88 // for the title and profile image
         
         return CGSize(width: view.frame.width, height: height )
     }
@@ -81,13 +103,16 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     
     //cellForItemAt - create cell
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
+        
+        cell.video = videos[indexPath.item]
+        
         return cell
     }
     
     //numberOfItemsInSection - number of cells
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return videos.count
     }
     
     //minimumLineSpacingForSectionAt - space between cells
