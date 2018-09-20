@@ -55,10 +55,9 @@ class VideoCell: BaseCell {
                     print(error!)
                     return
                 }
-                self.thumbnailImageView.image = UIImage(data: data!)
-//                DispatchQueue.main.async(execute: { () -> Void in
-//                    completionHandler()
-//                })
+                DispatchQueue.main.async(execute: { () -> Void in
+                    self.thumbnailImageView.image = UIImage(data: data!)
+                })
             }.resume()
         }
     }
