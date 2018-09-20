@@ -13,21 +13,23 @@ class VideoCell: BaseCell {
     var video : Video?{
         didSet{ //this call when video is set (from HomeController)
             titleLabel.text = video?.title
-            if let thumbnailImageName = video?.thumbnailImageName{
-                thumbnailImageView.image = UIImage(named: thumbnailImageName)
-            }
+//            if let thumbnailImageName = video?.thumbnailImageName{
+//                thumbnailImageView.image = UIImage(named: thumbnailImageName)
+//            }
+            setupThumbnailImage()
             if let profileImageName = video?.channel?.profileImageName{
                 userProfileImageView.image = UIImage(named: profileImageName)
             }
-            if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews{
-                
-                let numberFormatter = NumberFormatter()//make ',' between every 3 digits 
-                numberFormatter.numberStyle = .decimal
-                
-                subtitleTextView.text = "\(channelName) • \(numberFormatter.string(from: numberOfViews)!) • 2 years ago"
-            }
+//            if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews{
+//
+//                let numberFormatter = NumberFormatter()//make ',' between every 3 digits
+//                numberFormatter.numberStyle = .decimal
+//
+//                subtitleTextView.text = "\(channelName) • \( numberOfViews) • 2 years ago"//numberFormatter.string(from:
+//
+//            }
             
-            //measure title text height (colculate height)
+            //measure title text height (calculate height)
             if let title = video?.title {
                 let size = CGSize(width: frame.width-16-44-8-16, height: 1000)//-16-44-8-16 means, 16 space from left side, 44 profile image, 8 space between profile image to label, and another 16 space from right side
                 let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
@@ -43,7 +45,26 @@ class VideoCell: BaseCell {
             
         }
     }
-    //colculate height for the label
+    
+    func setupThumbnailImage(){
+        if let thumbnailImageUrl = video?.thumbnailImageName{
+
+            let url = URL(string: thumbnailImageUrl)
+            URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                if error != nil{
+                    print(error!)
+                    return
+                }
+                self.thumbnailImageView.image = UIImage(data: data!)
+//                DispatchQueue.main.async(execute: { () -> Void in
+//                    completionHandler()
+//                })
+            }.resume()
+        }
+    }
+    
+    
+    //calculate height for the label
     var titleLabelHeightConstraint: NSLayoutConstraint?
     
     let thumbnailImageView : UIImageView = {//main image

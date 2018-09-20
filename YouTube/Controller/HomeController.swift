@@ -8,32 +8,106 @@
 
 import UIKit
 
+//this two struct are for read the json
+struct VideoStruct :Decodable{
+    let title: String?
+    let number_of_views: Int?
+    let thumbnail_image_name: String?
+    let channel : ChannelStruct?
+    let duration: Int?
+}
+struct ChannelStruct :Decodable{
+    let name: String?
+    let profile_image_name: String?
+}
+
+
 class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
-    var videos: [Video] = {
+    var videos : [Video]?
+//        didSet{
+//            collectionView?.reloadData()
+//        }
+//    }
+//    var videos: [Video] = {
+//
+//        var kanyeChannel = Channel()
+//        kanyeChannel.name = "KanyeIsTheBestChannel"
+//        kanyeChannel.profileImageName = "kanye_profile"
+//
+//        var blackSpaceVideo = Video()
+//        blackSpaceVideo.title = "Taylor Swift - Blank Space"
+//        blackSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
+//        blackSpaceVideo.channel = kanyeChannel
+//        blackSpaceVideo.numberOfViews = 42543534533432423
+//
+//
+//        var badBloodVideo = Video()
+//        badBloodVideo.title = "Taylor Swift - Bad Blood featuring Kendrick Lamar"
+//        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
+//        badBloodVideo.channel = kanyeChannel
+//        badBloodVideo.numberOfViews = 4423423566632
+//
+//        return [blackSpaceVideo,badBloodVideo]
+//
+//    }()
+    
+    
+    
+    
+
+    
+    func fetchVideos(completionHandler: @escaping (HomeController) -> ()){
         
-        var kanyeChannel = Channel()
-        kanyeChannel.name = "KanyeIsTheBestChannel"
-        kanyeChannel.profileImageName = "kanye_profile"
+        let urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
         
-        var blackSpaceVideo = Video()
-        blackSpaceVideo.title = "Taylor Swift - Blank Space"
-        blackSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
-        blackSpaceVideo.channel = kanyeChannel
-        blackSpaceVideo.numberOfViews = 42543534533432423
-        
-        
-        var badBloodVideo = Video()
-        badBloodVideo.title = "Taylor Swift - Bad Blood featuring Kendrick Lamar"
-        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
-        badBloodVideo.channel = kanyeChannel
-        badBloodVideo.numberOfViews = 4423423566632
-        
-        return [blackSpaceVideo,badBloodVideo]
-    }()
+        guard let url = URL(string: urlString) else //noted is URL and not NSURL. urlString could be nil so we use guard
+        {return}
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+
+            if error != nil{
+                print(error!)
+                return
+            }
+            guard let data = data else {
+                print("data is nil")
+                return
+            }
+            self.jsonRequest(data: data)
+            DispatchQueue.main.async(execute: { () -> Void in
+                completionHandler(self)
+            })
+            
+        }.resume()
+    }
+    func jsonRequest(data:Data){
+        do{
+            let jsonVideos = try JSONDecoder().decode([VideoStruct].self, from: data)
+            
+            self.videos = [Video]()
+            for jsonVideo in jsonVideos {
+                
+                let channel = Channel(name: jsonVideo.channel?.name, profileImageName: jsonVideo.channel?.profile_image_name)
+                let video = Video(thumbnailImageName: jsonVideo.thumbnail_image_name, title: jsonVideo.title, numberOfViews: jsonVideo.number_of_views, uploadData: nil, channel: channel)
+                self.videos?.append(video)
+            }
+            
+        } catch let jsonErr{
+            print("Error serializing json:",jsonErr)
+        }
+
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchVideos { (self) in
+            self.collectionView?.reloadData()
+//            self.vi
+        }
+        
         
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false //darker color
@@ -105,14 +179,15 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
         
-        cell.video = videos[indexPath.item]
+        cell.video = videos?[indexPath.item]
         
         return cell
     }
     
     //numberOfItemsInSection - number of cells
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos.count
+
+        return videos?.count ?? 0 //if videos nil return 0 else return videos.count
     }
     
     //minimumLineSpacingForSectionAt - space between cells
