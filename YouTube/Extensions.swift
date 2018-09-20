@@ -26,7 +26,22 @@ extension UIView{
         
         
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-        
-        
     }
+}
+
+extension UIImageView{
+    
+    //get and change the images from json
+    func loadImageUsingUrlString( urlString: String){
+        let url = URL(string: urlString)
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error != nil{
+                print(error!)
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.image = UIImage(data: data!)
+            })
+            }.resume()
+    }   
 }

@@ -15,6 +15,7 @@ class Video{ //: NSObject
     var numberOfViews : Int?//NSNumber?
     var uploadData: NSData?
     var channel: Channel?
+    var duration: Int?
     
 //    override init() {
 //    }

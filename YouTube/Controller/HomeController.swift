@@ -56,8 +56,8 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     
     
 
-    
-    func fetchVideos(completionHandler: @escaping (HomeController) -> ()){
+    //completionHandler: @escaping (HomeController) -> ()
+    func fetchVideos(){
         
         let urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
         
@@ -75,8 +75,10 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
                 return
             }
             self.jsonRequest(data: data)
+
+            //we must have been on main mode for reload data
             DispatchQueue.main.async(execute: { () -> Void in
-                completionHandler(self)
+                self.collectionView?.reloadData()
             })
             
         }.resume()
@@ -103,10 +105,7 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchVideos { (self) in
-            self.collectionView?.reloadData()
-//            self.vi
-        }
+        fetchVideos()
         
         
         navigationItem.title = "Home"

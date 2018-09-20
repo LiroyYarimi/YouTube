@@ -13,12 +13,12 @@ class VideoCell: BaseCell {
     var video : Video?{
         didSet{ //this call when video is set (from HomeController)
             titleLabel.text = video?.title
-//            if let thumbnailImageName = video?.thumbnailImageName{
-//                thumbnailImageView.image = UIImage(named: thumbnailImageName)
-//            }
-            setupThumbnailImage()
-            if let profileImageName = video?.channel?.profileImageName{
-                userProfileImageView.image = UIImage(named: profileImageName)
+
+            if let thumbnailImageUrl = video?.thumbnailImageName{
+                self.thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
+            }
+            if let profileImageUrl = video?.channel?.profileImageName{
+                self.userProfileImageView.loadImageUsingUrlString(urlString: profileImageUrl)
             }
 //            if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews{
 //
@@ -46,21 +46,6 @@ class VideoCell: BaseCell {
         }
     }
     
-    func setupThumbnailImage(){
-        if let thumbnailImageUrl = video?.thumbnailImageName{
-
-            let url = URL(string: thumbnailImageUrl)
-            URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                if error != nil{
-                    print(error!)
-                    return
-                }
-                DispatchQueue.main.async(execute: { () -> Void in
-                    self.thumbnailImageView.image = UIImage(data: data!)
-                })
-            }.resume()
-        }
-    }
     
     
     //calculate height for the label
@@ -86,6 +71,7 @@ class VideoCell: BaseCell {
         imageView.image = UIImage(named: "taylor_swift_profile")
         imageView.layer.cornerRadius = 22 //we want round image so if the image size is 44x44 so lets round it by half(22).
         imageView.layer.masksToBounds = true //for the round corners
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
