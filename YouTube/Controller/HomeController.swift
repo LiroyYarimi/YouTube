@@ -25,36 +25,6 @@ struct ChannelStruct :Decodable{
 class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     var videos : [Video]?
-//        didSet{
-//            collectionView?.reloadData()
-//        }
-//    }
-//    var videos: [Video] = {
-//
-//        var kanyeChannel = Channel()
-//        kanyeChannel.name = "KanyeIsTheBestChannel"
-//        kanyeChannel.profileImageName = "kanye_profile"
-//
-//        var blackSpaceVideo = Video()
-//        blackSpaceVideo.title = "Taylor Swift - Blank Space"
-//        blackSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
-//        blackSpaceVideo.channel = kanyeChannel
-//        blackSpaceVideo.numberOfViews = 42543534533432423
-//
-//
-//        var badBloodVideo = Video()
-//        badBloodVideo.title = "Taylor Swift - Bad Blood featuring Kendrick Lamar"
-//        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
-//        badBloodVideo.channel = kanyeChannel
-//        badBloodVideo.numberOfViews = 4423423566632
-//
-//        return [blackSpaceVideo,badBloodVideo]
-//
-//    }()
-    
-    
-    
-    
 
     //completionHandler: @escaping (HomeController) -> ()
     func fetchVideos(){
@@ -147,9 +117,14 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
 
     }
     
+    let settingsLauncher = SettingsLauncher()
+    
     //this func call when user press on more button (3 points)
     @objc func handleMore(){
-        print("more button is pressed")
+        //show menu
+        
+        settingsLauncher.showSettings()
+        
     }
     
     //this func call when user press on search button

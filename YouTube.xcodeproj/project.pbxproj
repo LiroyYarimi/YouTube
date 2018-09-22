@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C82284782156303A0065F0B2 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82284772156303A0065F0B2 /* SettingsLauncher.swift */; };
 		C8B165CF214FA8F6002E1FE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */; };
 		C8B165D1214FA8F6002E1FE6 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165D0214FA8F6002E1FE6 /* HomeController.swift */; };
 		C8B165D4214FA8F6002E1FE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B165D2214FA8F6002E1FE6 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C82284772156303A0065F0B2 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		C8B165CB214FA8F6002E1FE6 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8B165D0214FA8F6002E1FE6 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */,
+				C82284772156303A0065F0B2 /* SettingsLauncher.swift */,
 				C8B165D0214FA8F6002E1FE6 /* HomeController.swift */,
 			);
 			path = Controller;
@@ -194,6 +197,7 @@
 				C8B165E5214FB8C2002E1FE6 /* BaseCell.swift in Sources */,
 				C8B165EB21501D42002E1FE6 /* MenuBar.swift in Sources */,
 				C8B165D1214FA8F6002E1FE6 /* HomeController.swift in Sources */,
+				C82284782156303A0065F0B2 /* SettingsLauncher.swift in Sources */,
 				C8B165CF214FA8F6002E1FE6 /* AppDelegate.swift in Sources */,
 				C8B165EE215130EF002E1FE6 /* Video.swift in Sources */,
 				C8B165E2214FB84A002E1FE6 /* VideoCell.swift in Sources */,
