@@ -25,14 +25,14 @@ class VideoCell: BaseCell {
                 self.userProfileImageView.loadImageUsingUrlString(urlString: profileImageUrl)
             }
             
-//            if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews{
-//
-//                let numberFormatter = NumberFormatter()//make ',' between every 3 digits
-//                numberFormatter.numberStyle = .decimal
-//
-//                subtitleTextView.text = "\(channelName) • \( numberOfViews) • 2 years ago"//numberFormatter.string(from:
-//
-//            }
+            if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews{
+
+                let numberFormatter = NumberFormatter()//make ',' between every 3 digits
+                numberFormatter.numberStyle = .decimal
+                let numberOfViewsWithFormat = numberFormatter.string(from: NSNumber(integerLiteral: numberOfViews))!
+
+                subtitleTextView.text = "\(channelName) • \(numberOfViewsWithFormat) Views"//" • 2 years ago"
+            }
             
             //measure title text height (calculate height)
             if let title = video?.title {
