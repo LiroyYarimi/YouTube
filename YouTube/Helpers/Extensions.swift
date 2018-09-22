@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//extensions 
 
 extension UIColor{
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor{
@@ -39,6 +40,7 @@ extension UIImageView{
                 print(error!)
                 return
             }
+            //we must have been on main thread (mode) for chaging the image
             DispatchQueue.main.async(execute: { () -> Void in
                 self.image = UIImage(data: data!)
             })

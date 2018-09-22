@@ -12,14 +12,19 @@ class VideoCell: BaseCell {
     
     var video : Video?{
         didSet{ //this call when video is set (from HomeController)
+            
+            //chnage the title label
             titleLabel.text = video?.title
 
+            //change thumbnail image
             if let thumbnailImageUrl = video?.thumbnailImageName{
                 self.thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
             }
+            //change profile image
             if let profileImageUrl = video?.channel?.profileImageName{
                 self.userProfileImageView.loadImageUsingUrlString(urlString: profileImageUrl)
             }
+            
 //            if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews{
 //
 //                let numberFormatter = NumberFormatter()//make ',' between every 3 digits

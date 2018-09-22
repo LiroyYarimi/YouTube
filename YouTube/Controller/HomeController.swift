@@ -76,7 +76,7 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
             }
             self.jsonRequest(data: data)
 
-            //we must have been on main mode for reload data
+            //we must have been on main thread (mode) for reload data
             DispatchQueue.main.async(execute: { () -> Void in
                 self.collectionView?.reloadData()
             })

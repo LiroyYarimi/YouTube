@@ -45,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C822847621561ED00065F0B2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C8B165E721500859002E1FE6 /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		C8B165C2214FA8F6002E1FE6 = {
 			isa = PBXGroup;
 			children = (
@@ -65,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				C8B165EC215130D3002E1FE6 /* Model */,
-				C8B165E621500829002E1FE6 /* Helpers */,
+				C822847621561ED00065F0B2 /* Helpers */,
 				C8B165E921501B49002E1FE6 /* Controller */,
 				C8B165E3214FB854002E1FE6 /* Cells */,
 				C8B165E0214FA918002E1FE6 /* Supporting Files */,
@@ -92,14 +100,6 @@
 				C8B165EA21501D42002E1FE6 /* MenuBar.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		C8B165E621500829002E1FE6 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				C8B165E721500859002E1FE6 /* Extensions.swift */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 		C8B165E921501B49002E1FE6 /* Controller */ = {
