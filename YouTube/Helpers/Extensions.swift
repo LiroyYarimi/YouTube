@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//extensions 
 
 extension UIColor{
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor{
@@ -30,11 +29,24 @@ extension UIView{
     }
 }
 
+//images cache is save the images and fix the delay
+let imageCache = NSCache<AnyObject, AnyObject>()
+
+
 extension UIImageView{
-    
+//class CustomImageView: UIImageView{//over the broblem that image loaded in the worng place (lecture 5 minute 10)
+
     //get and change the images from json
     func loadImageUsingUrlString( urlString: String){
         let url = URL(string: urlString)
+        
+        image = nil
+        //if we already loaded this image, we can get it from the imageCache
+        if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage{
+            self.image = imageFromCache
+            return
+        }
+        
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil{
                 print(error!)
@@ -42,7 +54,12 @@ extension UIImageView{
             }
             //we must have been on main thread (mode) for chaging the image
             DispatchQueue.main.async(execute: { () -> Void in
-                self.image = UIImage(data: data!)
+//                self.image = UIImage(data: data!)
+                
+                //save this image in our omageCache
+                let imageToCache = UIImage(data: data!)
+                imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
+                self.image = imageToCache
             })
             }.resume()
     }   
