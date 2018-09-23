@@ -141,22 +141,6 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         let setting = self.settings[indexPath.item]
 
         handleDismiss(setting: setting)
-        
-//        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-//            //this animate is exactly like handleBlackViewDismiss()
-//            self.blackView.alpha = 0
-//
-//            if let window = UIApplication.shared.keyWindow{
-//                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
-//            }
-//        }) { (completed : Bool) in
-//            //what happen after animate is finish
-//
-//            let setting = self.settings[indexPath.item]
-//            if setting.name != "Cancel"{
-//                self.homeController?.showControllerForSetting(setting: setting)
-//            }
-//        }
     }
     
     override init() {

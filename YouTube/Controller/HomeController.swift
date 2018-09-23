@@ -29,61 +29,22 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     //completionHandler: @escaping (HomeController) -> ()
     func fetchVideos(){
         
-        let urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
-        
-        guard let url = URL(string: urlString) else //noted is URL and not NSURL. urlString could be nil so we use guard
-        {return}
-
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-
-            if error != nil{
-                print(error!)
-                return
-            }
-            guard let data = data else {
-                print("data is nil")
-                return
-            }
-            self.jsonRequest(data: data)
-
-            //we must have been on main thread (mode) for reload data
-            DispatchQueue.main.async(execute: { () -> Void in
-                self.collectionView?.reloadData()
-            })
-            
-        }.resume()
-    }
-    func jsonRequest(data:Data){
-        do{
-            let jsonVideos = try JSONDecoder().decode([VideoStruct].self, from: data)
-            
-            self.videos = [Video]()
-            for jsonVideo in jsonVideos {
-                
-                let channel = Channel(name: jsonVideo.channel?.name, profileImageName: jsonVideo.channel?.profile_image_name)
-                let video = Video(thumbnailImageName: jsonVideo.thumbnail_image_name, title: jsonVideo.title, numberOfViews: jsonVideo.number_of_views, uploadData: nil, channel: channel)
-                self.videos?.append(video)
-            }
-            
-        } catch let jsonErr{
-            print("Error serializing json:",jsonErr)
+        ApiService.sharedInstance.fetchVideos { (videos: [Video]) in
+            self.videos = videos
+            self.collectionView?.reloadData()
         }
-
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fetchVideos()
         
-        
-        navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false //darker color
         
         //make a better looking title
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width-32, height: view.frame.height))//32 is for spacing from the left side
-        titleLabel.text = "Home"
+        titleLabel.text = "  Home"
         titleLabel.textColor = .white
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
@@ -150,9 +111,21 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     
     //create menu bar
     private func setupMenuBar(){
+        
+        navigationController?.hidesBarsOnSwipe = true //it's hide the navigation bar when the user is swiping
+        
+        //this redView is for to make the process of the hide navigation bar more smooth
+        let redView = UIView()
+        redView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        view.addSubview(redView)
+        view.addConstraintsWithVisualFormat(format: "H:|[v0]|", views: redView)
+        view.addConstraintsWithVisualFormat(format: "V:|[v0(50)]|", views: redView)
+        
         view.addSubview(menuBar)
         view.addConstraintsWithVisualFormat(format: "H:|[v0]|", views: menuBar)
-        view.addConstraintsWithVisualFormat(format: "V:|[v0(50)]", views: menuBar)
+        view.addConstraintsWithVisualFormat(format: "V:[v0(50)]", views: menuBar)
+        
+        menuBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true//without this line, the menu bar will half cut
     }
     
     //sizeForItemAt- cell size
