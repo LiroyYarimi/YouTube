@@ -117,14 +117,30 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
 
     }
     
-    let settingsLauncher = SettingsLauncher()
+    //we definition this way because we want to do this line of code "launcher.homeController = self" one time only and not every time user press the more button.
+    //we need to use lazy var because at the start settingsLauncher is nil so we can't do this line: launcher.homeController = self
+    lazy var settingsLauncher : SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
     
     //this func call when user press on more button (3 points)
     @objc func handleMore(){
-        //show menu
+        //show setting menu
         
         settingsLauncher.showSettings()
+    }
+    
+    //show controller for setting
+    func showControllerForSetting(setting: Setting){
         
+        let dummySettingsViewController = UIViewController()
+        dummySettingsViewController.view.backgroundColor = .white //background color
+        dummySettingsViewController.navigationItem.title = setting.name //change the title
+        navigationController?.navigationBar.tintColor = .white// chnage the "back" color
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]// chnage the title color
+        navigationController?.pushViewController(dummySettingsViewController, animated: true)
     }
     
     //this func call when user press on search button

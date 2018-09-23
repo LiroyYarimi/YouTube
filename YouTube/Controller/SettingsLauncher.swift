@@ -32,12 +32,23 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     let cellId = "cellId"
     let cellHeight: CGFloat = 50
     
+    enum settingOption : String {
+        case setting = "Settings"
+        case terms = "Terms & privacy policy"
+        case feedback = "Send Feedback"
+        case help = "Help"
+        case account = "Switch Account"
+        case cancel = "Cancel"
+    }
+    
     let settings: [Setting] = {
-        return [Setting(name: "Settings", imageName: "settings"), Setting(name: "Terms & privacy policy", imageName: "privacy"), Setting(name: "Send Feedback", imageName: "feedback"), Setting(name: "Help", imageName: "help"), Setting(name: "Switch Account", imageName: "switch_account"), Setting(name: "Cancel", imageName: "cancel")]
+        return [Setting(name: settingOption.setting.rawValue, imageName: "settings"), Setting(name: settingOption.terms.rawValue, imageName: "privacy"), Setting(name: settingOption.feedback.rawValue, imageName: "feedback"), Setting(name: settingOption.help.rawValue, imageName: "help"), Setting(name: settingOption.account.rawValue, imageName: "switch_account"), Setting(name: settingOption.cancel.rawValue, imageName: "cancel")]
     }()
     
+    var homeController: HomeController?
+    
     //this func call when user press on more button (3 points)
-    @objc func showSettings(){
+    func showSettings(){
         //show menu
         
         //black backgroun view
@@ -47,7 +58,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)//dark color
             
             //when user tap on the black view, call function handleBlackViewDismiss
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleBlackViewDismiss)))
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
             
             window.addSubview(blackView)
             window.addSubview(collectionView)
@@ -70,7 +81,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }
     
     //dismiss the black view
-    @objc func handleBlackViewDismiss(){
+    @objc func handleDismiss(setting : Setting){
         
         UIView.animate(withDuration: 0.5) {
             self.blackView.alpha = 0
@@ -79,6 +90,23 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
             
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            //this animate is exactly like handleBlackViewDismiss()
+            self.blackView.alpha = 0
+            
+            if let window = UIApplication.shared.keyWindow{
+                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+            }
+        }) { (completed : Bool) in
+            //what happen after animate is finish
+            
+            let name = setting.name
+            
+            if name == settingOption.setting.rawValue || name == settingOption.terms.rawValue || name == settingOption.feedback.rawValue || name == settingOption.account.rawValue || name == settingOption.help.rawValue{
+                self.homeController?.showControllerForSetting(setting: setting)
+            }
         }
     }
     
@@ -101,6 +129,30 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    //this function call when user select one of the settings button
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let setting = self.settings[indexPath.item]
+
+        handleDismiss(setting: setting)
+        
+//        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//            //this animate is exactly like handleBlackViewDismiss()
+//            self.blackView.alpha = 0
+//
+//            if let window = UIApplication.shared.keyWindow{
+//                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+//            }
+//        }) { (completed : Bool) in
+//            //what happen after animate is finish
+//
+//            let setting = self.settings[indexPath.item]
+//            if setting.name != "Cancel"{
+//                self.homeController?.showControllerForSetting(setting: setting)
+//            }
+//        }
     }
     
     override init() {
