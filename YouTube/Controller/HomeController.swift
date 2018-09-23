@@ -137,7 +137,7 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
         
         let dummySettingsViewController = UIViewController()
         dummySettingsViewController.view.backgroundColor = .white //background color
-        dummySettingsViewController.navigationItem.title = setting.name //change the title
+        dummySettingsViewController.navigationItem.title = setting.name.rawValue //change the title
         navigationController?.navigationBar.tintColor = .white// chnage the "back" color
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]// chnage the title color
         navigationController?.pushViewController(dummySettingsViewController, animated: true)

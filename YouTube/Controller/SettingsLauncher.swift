@@ -9,13 +9,22 @@
 import UIKit
 
 class Setting: NSObject {
-    let name: String
+    let name: SettingName
     let imageName: String
     
-    init(name: String, imageName: String){
+    init(name: SettingName, imageName: String){
         self.name = name
         self.imageName = imageName
     }
+}
+
+enum SettingName : String {
+    case Settings = "Settings"
+    case TermsPrivacy = "Terms & privacy policy"
+    case SendFeedback = "Send Feedback"
+    case Help = "Help"
+    case SwitchAccount = "Switch Account"
+    case Cancel = "Cancel"
 }
 
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
@@ -32,17 +41,10 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     let cellId = "cellId"
     let cellHeight: CGFloat = 50
     
-    enum settingOption : String {
-        case setting = "Settings"
-        case terms = "Terms & privacy policy"
-        case feedback = "Send Feedback"
-        case help = "Help"
-        case account = "Switch Account"
-        case cancel = "Cancel"
-    }
+
     
     let settings: [Setting] = {
-        return [Setting(name: settingOption.setting.rawValue, imageName: "settings"), Setting(name: settingOption.terms.rawValue, imageName: "privacy"), Setting(name: settingOption.feedback.rawValue, imageName: "feedback"), Setting(name: settingOption.help.rawValue, imageName: "help"), Setting(name: settingOption.account.rawValue, imageName: "switch_account"), Setting(name: settingOption.cancel.rawValue, imageName: "cancel")]
+        return [Setting(name: .Settings, imageName: "settings"), Setting(name: .TermsPrivacy, imageName: "privacy"), Setting(name: .SendFeedback, imageName: "feedback"), Setting(name: .Help, imageName: "help"), Setting(name: .SwitchAccount, imageName: "switch_account"), Setting(name: .Cancel, imageName: "cancel")]
     }()
     
     var homeController: HomeController?
@@ -83,6 +85,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     //dismiss the black view
     @objc func handleDismiss(setting : Setting){
         
+        
         UIView.animate(withDuration: 0.5) {
             self.blackView.alpha = 0
             
@@ -102,9 +105,10 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         }) { (completed : Bool) in
             //what happen after animate is finish
             
-            let name = setting.name
-            
-            if name == settingOption.setting.rawValue || name == settingOption.terms.rawValue || name == settingOption.feedback.rawValue || name == settingOption.account.rawValue || name == settingOption.help.rawValue{
+            if setting.name != .Cancel {
+                if setting.imageName == ""{//for some reason, if the user pressed on the black background the setting.name is .Setting so we need to over it
+                    return
+                }
                 self.homeController?.showControllerForSetting(setting: setting)
             }
         }
