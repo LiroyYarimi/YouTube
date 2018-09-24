@@ -21,6 +21,7 @@ class MenuBar: BaseCell , UICollectionViewDataSource, UICollectionViewDelegate, 
     
     let cellId = "cellId"
     let imageNames = ["home", "trending", "subscriptions","account"]
+    var homeController: HomeController?
     
     override func setupViews() {
         
@@ -56,15 +57,20 @@ class MenuBar: BaseCell , UICollectionViewDataSource, UICollectionViewDelegate, 
     
     //move the rectangle white menu, under the user choice
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //we dont need the animate and all this stuff becasue the function scrollViewDidScroll in the HomeController
+        
+        
 //        print(indexPath.item) //get the index of the menu button
         
-        let x = CGFloat(indexPath.item) * frame.width / 4
-        horizontalBarLeftAnchorConstraint?.constant = x
-        
-        //make animate
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
+//        let x = CGFloat(indexPath.item) * frame.width / 4
+//        horizontalBarLeftAnchorConstraint?.constant = x
+//
+//        //make animate
+//        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//            self.layoutIfNeeded()
+//        }, completion: nil)
+//
+        homeController?.scrollToMenuIndex(menuIndex: indexPath.item)//scroll the view when user press in the menu bar button
     }
 
     //numberOfSections - number of button in the menu bar
