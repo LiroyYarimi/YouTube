@@ -8,13 +8,44 @@
 
 import UIKit
 
+//this two struct are for read the json
+struct VideoStruct :Decodable{
+    let title: String?
+    let number_of_views: Int?
+    let thumbnail_image_name: String?
+    let channel : ChannelStruct?
+    let duration: Int?
+}
+struct ChannelStruct :Decodable{
+    let name: String?
+    let profile_image_name: String?
+}
+
 class ApiService {
     
     static let sharedInstance = ApiService()
     
-    //deal with the json data
+    let baseUrl = "https://s3-us-west-2.amazonaws.com/youtubeassets/"
+    
     func fetchVideos(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes
-        let urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
+        
+        fetchFeedForUrlString(urlString: "\(baseUrl)home.json", completion: completion)
+    }
+    
+    func fetchTrendingFeed(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes
+
+        fetchFeedForUrlString(urlString: "\(baseUrl)trending.json", completion: completion)
+
+    }
+    
+    func fetchSubscriptionFeed(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes
+        
+        fetchFeedForUrlString(urlString: "\(baseUrl)subscriptions.json", completion: completion)
+
+    }
+    
+    //deal with the json data
+    func fetchFeedForUrlString(urlString: String, completion: @escaping ([Video]) -> ()){
         
         guard let url = URL(string: urlString) else //noted is URL and not NSURL. urlString could be nil so we use guard
         {return}
@@ -41,7 +72,7 @@ class ApiService {
                     let video = Video(thumbnailImageName: jsonVideo.thumbnail_image_name, title: jsonVideo.title, numberOfViews: jsonVideo.number_of_views, uploadData: nil, channel: channel)
                     videos.append(video)
                 }
-
+                
                 //we must have been on main thread (mode) for sending data
                 DispatchQueue.main.async(execute: { () -> Void in
                     completion(videos)//send the videos array the HomeController
@@ -51,6 +82,6 @@ class ApiService {
                 print("Error serializing json:",jsonErr)
             }
             
-        }.resume()
+            }.resume()
     }
 }

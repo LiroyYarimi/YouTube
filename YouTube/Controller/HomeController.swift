@@ -8,20 +8,6 @@
 
 import UIKit
 
-//this two struct are for read the json
-struct VideoStruct :Decodable{
-    let title: String?
-    let number_of_views: Int?
-    let thumbnail_image_name: String?
-    let channel : ChannelStruct?
-    let duration: Int?
-}
-struct ChannelStruct :Decodable{
-    let name: String?
-    let profile_image_name: String?
-}
-
-
 class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     
@@ -32,6 +18,9 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     }()
     
     let cellId = "cellId"
+    let trendingCellId = "trendingCellId"
+    let subscriptionCellId = "subscriptionCellId"
+    
     let navigationBarTitle = ["Home","Trending","Subscriptions","Account"]
 
     
@@ -64,9 +53,10 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
             
             
         collectionView?.backgroundColor = .white
-//        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-//        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellId)
+        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellId)
+
         
         
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)//push the collectionView 50 pixel down for menuBar
@@ -184,7 +174,18 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        let identifier: String
+        
+        if indexPath.item == 1{
+            identifier = trendingCellId
+        }else if indexPath.item == 2{
+            identifier = subscriptionCellId
+        }else{
+            identifier = cellId
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         
         return cell
     }

@@ -11,6 +11,9 @@
 		C822847A215664730065F0B2 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8228479215664730065F0B2 /* SettingCell.swift */; };
 		C8A0C69B2157C4330071287D /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A0C69A2157C4330071287D /* ApiService.swift */; };
 		C8A17892215918400003316F /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A17891215918400003316F /* FeedCell.swift */; };
+		C8A17894215920C30003316F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A17893215920C30003316F /* MenuCell.swift */; };
+		C8A1789621592CEB0003316F /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A1789521592CEB0003316F /* TrendingCell.swift */; };
+		C8A1789821592FA10003316F /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A1789721592FA10003316F /* SubscriptionCell.swift */; };
 		C8B165CF214FA8F6002E1FE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */; };
 		C8B165D1214FA8F6002E1FE6 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165D0214FA8F6002E1FE6 /* HomeController.swift */; };
 		C8B165D4214FA8F6002E1FE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B165D2214FA8F6002E1FE6 /* Main.storyboard */; };
@@ -28,6 +31,9 @@
 		C8228479215664730065F0B2 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		C8A0C69A2157C4330071287D /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		C8A17891215918400003316F /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		C8A17893215920C30003316F /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		C8A1789521592CEB0003316F /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
+		C8A1789721592FA10003316F /* SubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
 		C8B165CB214FA8F6002E1FE6 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8B165D0214FA8F6002E1FE6 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -112,11 +118,13 @@
 		C8B165E3214FB854002E1FE6 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C8A1789721592FA10003316F /* SubscriptionCell.swift */,
+				C8A1789521592CEB0003316F /* TrendingCell.swift */,
 				C8B165E1214FB84A002E1FE6 /* VideoCell.swift */,
 				C8A17891215918400003316F /* FeedCell.swift */,
-				C8B165E4214FB8C2002E1FE6 /* BaseCell.swift */,
 				C8228479215664730065F0B2 /* SettingCell.swift */,
-				C8B165EA21501D42002E1FE6 /* MenuBar.swift */,
+				C8A17893215920C30003316F /* MenuCell.swift */,
+				C8B165E4214FB8C2002E1FE6 /* BaseCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -127,6 +135,7 @@
 				C8B165CE214FA8F6002E1FE6 /* AppDelegate.swift */,
 				C82284772156303A0065F0B2 /* SettingsLauncher.swift */,
 				C8B165D0214FA8F6002E1FE6 /* HomeController.swift */,
+				C8B165EA21501D42002E1FE6 /* MenuBar.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -212,6 +221,8 @@
 			files = (
 				C8B165E821500859002E1FE6 /* Extensions.swift in Sources */,
 				C8B165E5214FB8C2002E1FE6 /* BaseCell.swift in Sources */,
+				C8A1789821592FA10003316F /* SubscriptionCell.swift in Sources */,
+				C8A17894215920C30003316F /* MenuCell.swift in Sources */,
 				C8B165EB21501D42002E1FE6 /* MenuBar.swift in Sources */,
 				C8B165D1214FA8F6002E1FE6 /* HomeController.swift in Sources */,
 				C8A17892215918400003316F /* FeedCell.swift in Sources */,
@@ -220,6 +231,7 @@
 				C8A0C69B2157C4330071287D /* ApiService.swift in Sources */,
 				C8B165EE215130EF002E1FE6 /* Video.swift in Sources */,
 				C8B165E2214FB84A002E1FE6 /* VideoCell.swift in Sources */,
+				C8A1789621592CEB0003316F /* TrendingCell.swift in Sources */,
 				C822847A215664730065F0B2 /* SettingCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
