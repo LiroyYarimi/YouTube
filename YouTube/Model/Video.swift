@@ -20,12 +20,13 @@ class Video{ //: NSObject
 //    override init() {
 //    }
     
-    init(thumbnailImageName: String?, title: String?, numberOfViews: Int?, uploadData: NSData?, channel: Channel?) {
+    init(thumbnailImageName: String?, title: String?, numberOfViews: Int?, uploadData: NSData?, channel: Channel? ,duration: Int?) {
         self.thumbnailImageName = thumbnailImageName
         self.channel = channel
         self.title = title
         self.numberOfViews = numberOfViews
         self.uploadData = uploadData
+        self.duration = duration
     }
     
 }

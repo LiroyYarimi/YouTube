@@ -24,6 +24,7 @@
 		C8B165E821500859002E1FE6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165E721500859002E1FE6 /* Extensions.swift */; };
 		C8B165EB21501D42002E1FE6 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165EA21501D42002E1FE6 /* MenuBar.swift */; };
 		C8B165EE215130EF002E1FE6 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B165ED215130EF002E1FE6 /* Video.swift */; };
+		C8D6DDF7215A735300334F95 /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D6DDF6215A735300334F95 /* VideoLauncher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		C8B165E721500859002E1FE6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C8B165EA21501D42002E1FE6 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		C8B165ED215130EF002E1FE6 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		C8D6DDF6215A735300334F95 /* VideoLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				C8B165E721500859002E1FE6 /* Extensions.swift */,
+				C8D6DDF6215A735300334F95 /* VideoLauncher.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				C8B165EB21501D42002E1FE6 /* MenuBar.swift in Sources */,
 				C8B165D1214FA8F6002E1FE6 /* HomeController.swift in Sources */,
 				C8A17892215918400003316F /* FeedCell.swift in Sources */,
+				C8D6DDF7215A735300334F95 /* VideoLauncher.swift in Sources */,
 				C82284782156303A0065F0B2 /* SettingsLauncher.swift in Sources */,
 				C8B165CF214FA8F6002E1FE6 /* AppDelegate.swift in Sources */,
 				C8A0C69B2157C4330071287D /* ApiService.swift in Sources */,

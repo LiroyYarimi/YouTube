@@ -94,6 +94,8 @@ class VideoCell: BaseCell {
         textView.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years ago"
         textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)//the text have default 4 pixel to the right so we delete it
         textView.textColor = UIColor.lightGray
+        textView.isScrollEnabled = false//stop scrolling
+        textView.isEditable = false//hide the keyboard
         return textView
     }()
     
