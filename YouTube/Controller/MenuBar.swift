@@ -10,6 +10,9 @@ import UIKit
 
 class MenuBar: BaseCell , UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
+    //MARK: - Properties Declaration
+    /***************************************************************/
+    
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -22,6 +25,11 @@ class MenuBar: BaseCell , UICollectionViewDataSource, UICollectionViewDelegate, 
     let cellId = "cellId"
     let imageNames = ["home", "trending", "subscriptions","account"]
     var homeController: HomeController?
+    
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint? //the x value of the white menu rectangle
+    
+    //MARK: - setupViews - Main function that call from init (BaseCell)
+    /***************************************************************/
     
     override func setupViews() {
         
@@ -38,7 +46,8 @@ class MenuBar: BaseCell , UICollectionViewDataSource, UICollectionViewDelegate, 
         setupHorizontalBar()
     }
     
-    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint? //the x value of the white menu rectangle
+    //MARK: - Functions
+    /***************************************************************/
     
     //create a white rectangle under the menu button
     func setupHorizontalBar(){

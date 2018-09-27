@@ -10,6 +10,9 @@ import UIKit
 
 class Video{ //: NSObject
     
+    //MARK: - Properties Declaration
+    /***************************************************************/
+    
     var thumbnailImageName: String? //the main image in video cell
     var title: String?
     var numberOfViews : Int?//NSNumber?
@@ -17,8 +20,8 @@ class Video{ //: NSObject
     var channel: Channel?
     var duration: Int?
     
-//    override init() {
-//    }
+    //MARK: - Init - Main Function
+    /***************************************************************/
     
     init(thumbnailImageName: String?, title: String?, numberOfViews: Int?, uploadData: NSData?, channel: Channel? ,duration: Int?) {
         self.thumbnailImageName = thumbnailImageName
@@ -31,13 +34,19 @@ class Video{ //: NSObject
     
 }
 
+//MARK: - Channel Class
+/***************************************************************/
+
 class Channel{ //: NSObject
+    
+    //MARK: - Properties Declaration
+    /***************************************************************/
     
     var name: String?
     var profileImageName : String?
     
-//    override init() {
-//    }
+    //MARK: - Init - Main Function
+    /***************************************************************/
     
     init(name: String?, profileImageName: String?){
         self.name = name

@@ -10,6 +10,9 @@ import UIKit
 
 class SettingCell: BaseCell {
     
+    //MARK: - Properties Declaration
+    /***************************************************************/
+    
     override var isHighlighted: Bool{
         didSet{
             backgroundColor = isHighlighted ? UIColor.darkGray : UIColor.white
@@ -43,6 +46,9 @@ class SettingCell: BaseCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
+    
+    //MARK: - setupViews - Main function that call from init (BaseCell)
+    /***************************************************************/
     
     override func setupViews() {
         super.setupViews()

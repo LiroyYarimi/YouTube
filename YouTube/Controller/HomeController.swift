@@ -10,6 +10,8 @@ import UIKit
 
 class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
+    //MARK: - Properties Declaration
+    /***************************************************************/
     
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()
@@ -22,8 +24,17 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
     let subscriptionCellId = "subscriptionCellId"
     
     let navigationBarTitle = ["Home","Trending","Subscriptions","Account"]
-
     
+    //we definition this way because we want to do this line of code "launcher.homeController = self" one time only and not every time user press the more button.
+    //we need to use lazy var because at the start settingsLauncher is nil so we can't do this line: launcher.homeController = self
+    lazy var settingsLauncher : SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
+
+    //MARK: - viewDidLoad - Main Function
+    /***************************************************************/
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +53,9 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
         setupMenuBar()
         setupNavBarButtons()
     }
+    
+    //MARK: - Functions
+    /***************************************************************/
     
     func setupCollectionView(){
         
@@ -82,13 +96,7 @@ class HomeController:  UICollectionViewController, UICollectionViewDelegateFlowL
 
     }
     
-    //we definition this way because we want to do this line of code "launcher.homeController = self" one time only and not every time user press the more button.
-    //we need to use lazy var because at the start settingsLauncher is nil so we can't do this line: launcher.homeController = self
-    lazy var settingsLauncher : SettingsLauncher = {
-        let launcher = SettingsLauncher()
-        launcher.homeController = self
-        return launcher
-    }()
+
     
     //this func call when user press on more button (3 points)
     @objc func handleMore(){

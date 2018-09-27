@@ -11,6 +11,11 @@ import AVFoundation
 
 class VideoPlayerView: UIView {
     
+    //MARK: - Properties Declaration
+    /***************************************************************/
+
+    var timer = Timer()//for hide the button and label after 2 secods
+    
     //until the video start (loading animate)
     let activityIndicatorView : UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
@@ -42,18 +47,7 @@ class VideoPlayerView: UIView {
     var isPlaying = false
     
     
-    @objc func handlePausePlay(){
-        
-        if isPlaying{
-            player?.pause()
-            pausePlayButton.setImage(UIImage(named: "play"), for: .normal)
-        }else{
-            player?.play()
-            pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
-        }
-        
-        isPlaying = !isPlaying
-    }
+    
     
     let videoLengthLabel: UILabel = {
         let label = UILabel()
@@ -87,25 +81,13 @@ class VideoPlayerView: UIView {
         return slider
     }()
     
-    @objc func handleSliderChange(){
-        
-        if let duration = player?.currentItem?.duration{
-            let totalSeconds = CMTimeGetSeconds(duration)
-            
-            let value = Float64(videoSlider.value) * totalSeconds
-            
-            let seekTime = CMTime(value: Int64(value), timescale: 1)
-            
-            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
-                
-            })
-        }
-        
-        
-    }
-    
+    //MARK: - Init - Main Function
+    /***************************************************************/
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setupTap()//add a tap gesture to our controlsContainersView
         
         setupPlayerView()
         
@@ -149,10 +131,45 @@ class VideoPlayerView: UIView {
         
         backgroundColor = .black
         
+        //get notigacation when the device is Landscape
+        
+    }
+    
+    //MARK: - Functions
+    /***************************************************************/
+    
+    @objc func handleSliderChange(){
+        
+        if let duration = player?.currentItem?.duration{
+            let totalSeconds = CMTimeGetSeconds(duration)
+            
+            let value = Float64(videoSlider.value) * totalSeconds
+            
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            
+            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+                
+            })
+        }
+    }
+    
+    @objc func handlePausePlay(){
+        
+        if isPlaying{
+            player?.pause()
+            pausePlayButton.setImage(UIImage(named: "play"), for: .normal)
+        }else{
+            player?.play()
+            pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
+        }
+        
+        isPlaying = !isPlaying
     }
     
     
-    //play the video
+    
+    
+    //play the video - play the video
     private func setupPlayerView(){
         let urlString = "https://firebasestorage.googleapis.com/v0/b/group-chat-c88d7.appspot.com/o/nice%20rabbit.mov?alt=media&token=f09891a6-767a-4293-9995-1b10525e18ae"
         
@@ -205,6 +222,10 @@ class VideoPlayerView: UIView {
                 
                 videoLengthLabel.text = "\(minutesText):\(secondsText)"
             }
+            
+            //--
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: false)
+
         }
     }
     
@@ -222,5 +243,42 @@ class VideoPlayerView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    // called every time interval from the timer
+    @objc func timerAction() {
+
+        pausePlayButton.isHidden = true
+        currentTimeLabel.isHidden = true
+        videoLengthLabel.isHidden = true
+        videoSlider.isHidden = true
+    }
+    
+
+    //add tap gesture to the controlsContainersView
+    func setupTap() {
+        
+        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
+        touchDown.minimumPressDuration = 0
+        touchDown.cancelsTouchesInView = false
+        controlsContainersView.addGestureRecognizer(touchDown)
+    }
+    
+    //this function call every time user pressed on the view
+    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
+        if (gesture.state == .began){
+
+            pausePlayButton.isHidden = false
+            currentTimeLabel.isHidden = false
+            videoLengthLabel.isHidden = false
+            videoSlider.isHidden = false
+            
+            //hide all buttons and label after 2 seconds
+            timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(timerAction), userInfo: nil, repeats: false)
+        }
+        
+    }
+    
+    
     
 }

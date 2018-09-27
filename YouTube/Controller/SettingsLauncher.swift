@@ -8,6 +8,9 @@
 
 import UIKit
 
+//MARK: - Setting class
+/***************************************************************/
+
 class Setting: NSObject {
     let name: SettingName
     let imageName: String
@@ -18,6 +21,9 @@ class Setting: NSObject {
     }
 }
 
+//MARK: - Enum - for all the button
+/***************************************************************/
+
 enum SettingName : String {
     case Settings = "Settings"
     case TermsPrivacy = "Terms & privacy policy"
@@ -27,7 +33,13 @@ enum SettingName : String {
     case Cancel = "Cancel"
 }
 
+//MARK: - SettingsLauncher Class
+/***************************************************************/
+
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    
+    //MARK: - Properties Declaration
+    /***************************************************************/
     
     let blackView = UIView() //the dark view show when user pressed on the more button
     
@@ -48,6 +60,18 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }()
     
     var homeController: HomeController?
+    
+    //MARK: - showSettings - Main function that call from other class
+    /***************************************************************/
+    
+    override init() {
+        super.init()
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.register(SettingCell.self, forCellWithReuseIdentifier: cellId)
+    }
     
     //this func call when user press on more button (3 points)
     func showSettings(){
@@ -143,12 +167,5 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         handleDismiss(setting: setting)
     }
     
-    override init() {
-        super.init()
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
-        collectionView.register(SettingCell.self, forCellWithReuseIdentifier: cellId)
-    }
+
 }

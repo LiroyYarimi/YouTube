@@ -8,6 +8,9 @@
 
 import UIKit
 
+//MARK: - Struct - for geting data from json
+/***************************************************************/
+
 //this two struct are for read the json
 struct VideoStruct :Decodable{
     let title: String?
@@ -21,23 +24,20 @@ struct ChannelStruct :Decodable{
     let profile_image_name: String?
 }
 
+//MARK: - ApiService Class
+/***************************************************************/
+
 class ApiService {
+    
+    //MARK: - Properties Declaration
+    /***************************************************************/
     
     static let sharedInstance = ApiService()
     
     let baseUrl = "https://s3-us-west-2.amazonaws.com/youtubeassets/"
     
-    func fetchVideos(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes ====home_num_likes.json
-        fetchFeedForUrlString(urlString: "\(baseUrl)home.json", completion: completion)
-    }
-    
-    func fetchTrendingFeed(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes
-        fetchFeedForUrlString(urlString: "\(baseUrl)trending.json", completion: completion)
-    }
-    
-    func fetchSubscriptionFeed(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes
-        fetchFeedForUrlString(urlString: "\(baseUrl)subscriptions.json", completion: completion)
-    }
+    //MARK: - fetchFeedForUrlString - Main Function
+    /***************************************************************/
     
     //deal with the json data
     func fetchFeedForUrlString(urlString: String, completion: @escaping ([Video]) -> ()){
@@ -62,7 +62,7 @@ class ApiService {
                 
                 var videos = [Video]()
                 for jsonVideo in jsonVideos {
-
+                    
                     let channel = Channel(name: jsonVideo.channel?.name, profileImageName: jsonVideo.channel?.profile_image_name)
                     let video = Video(thumbnailImageName: jsonVideo.thumbnail_image_name, title: jsonVideo.title, numberOfViews: jsonVideo.number_of_views, uploadData: nil, channel: channel ,duration: jsonVideo.duration)
                     videos.append(video)
@@ -79,4 +79,22 @@ class ApiService {
             
             }.resume()
     }
+    
+    
+    
+    //MARK: - Functions
+    /***************************************************************/
+    
+    func fetchVideos(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes ====home_num_likes.json
+        fetchFeedForUrlString(urlString: "\(baseUrl)home.json", completion: completion)
+    }
+    
+    func fetchTrendingFeed(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes
+        fetchFeedForUrlString(urlString: "\(baseUrl)trending.json", completion: completion)
+    }
+    
+    func fetchSubscriptionFeed(completion: @escaping ([Video]) -> ()){ //create a completion block to send the videos array between classes
+        fetchFeedForUrlString(urlString: "\(baseUrl)subscriptions.json", completion: completion)
+    }
+    
 }

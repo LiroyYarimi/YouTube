@@ -8,11 +8,17 @@
 
 import UIKit
 
+//MARK: - Extension - easyer to change color
+/***************************************************************/
+
 extension UIColor{
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor{
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
 }
+
+//MARK: - Extension - easyer to add constraint
+/***************************************************************/
 
 extension UIView{
     func addConstraintsWithVisualFormat(format: String, views: UIView...){
@@ -28,6 +34,9 @@ extension UIView{
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }
+
+//MARK: - Extension - easyer to change image
+/***************************************************************/
 
 //images cache is save the images and fix the delay
 let imageCache = NSCache<AnyObject, AnyObject>()

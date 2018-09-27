@@ -10,6 +10,9 @@ import UIKit
 
 class MenuCell : BaseCell{
     
+    //MARK: - Properties Declaration
+    /***************************************************************/
+    
     let imageView : UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "home")?.withRenderingMode(.alwaysTemplate)
@@ -30,6 +33,9 @@ class MenuCell : BaseCell{
             imageView.tintColor = isSelected ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)
         }
     }
+    
+    //MARK: - setupViews - Main function that call from init (BaseCell)
+    /***************************************************************/
     
     override func setupViews() {
         super.setupViews()

@@ -10,6 +10,9 @@ import UIKit
 
 class VideoCell: BaseCell {
     
+    //MARK: - Properties Declaration
+    /***************************************************************/
+    
     var video : Video?{
         didSet{ //this call when video is set (from HomeController)
             
@@ -99,7 +102,8 @@ class VideoCell: BaseCell {
         return textView
     }()
     
-
+    //MARK: - setupViews - Main function that call from init (BaseCell)
+    /***************************************************************/
     
     override func setupViews() {
         
@@ -116,10 +120,11 @@ class VideoCell: BaseCell {
         
         constraintTitleLabel()
         constraintSubtitleTextView()
-        
-
 
     }
+    
+    //MARK: - Functions
+    /***************************************************************/
     
     // constraint for titleLabel - we do that way because we want the cell match to the text size
     func constraintTitleLabel(){
