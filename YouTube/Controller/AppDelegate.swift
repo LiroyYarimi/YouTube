@@ -31,12 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
-        //change the status bar color to white. (to make it work we need to create a new line in info.plist. the new line is: View controller-based status bar appearance. and value is NO
+        //change the status bar color to white. (to make it work we need to create a new line in info.plist. the new line is: "View controller-based status bar appearance". and value is "NO"
         application.statusBarStyle = .lightContent
         
         //change the status bar background color. To do it we create UIView and change his background color
         let statusBarBackgroundView = UIView()
         statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
+        //this is for iphone x
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
+        
         
         //add this statusBarBackgroundView to our window at the top
         window?.addSubview(statusBarBackgroundView)
@@ -71,3 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//change the status bar color (safearea)
+extension UIApplication {
+
+    //        UIApplication.shared.statusBarView?.backgroundColor = UIColor.green
+
+    //change the status bar safe area
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+
+}
