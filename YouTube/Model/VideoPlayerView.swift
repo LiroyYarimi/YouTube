@@ -268,13 +268,17 @@ class VideoPlayerView: UIView {
     @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
         if (gesture.state == .began){
 
-            pausePlayButton.isHidden = false
-            currentTimeLabel.isHidden = false
-            videoLengthLabel.isHidden = false
-            videoSlider.isHidden = false
+            pausePlayButton.isHidden = !pausePlayButton.isHidden//false
+            currentTimeLabel.isHidden = !currentTimeLabel.isHidden
+            videoLengthLabel.isHidden = !videoLengthLabel.isHidden
+            videoSlider.isHidden = !videoSlider.isHidden
             
             //hide all buttons and label after 2 seconds
-            timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(timerAction), userInfo: nil, repeats: false)
+            timer.invalidate()
+            if pausePlayButton.isHidden == false{
+                timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(timerAction), userInfo: nil, repeats: false)
+            }
+            
         }
         
     }
