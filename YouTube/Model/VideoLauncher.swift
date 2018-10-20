@@ -34,8 +34,15 @@ class VideoLauncher: NSObject {
             let height = keyWindow.frame.width * 9 / 16
             let videoPlayerFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
             self.videoPlayerView = VideoPlayerView(frame: videoPlayerFrame)
-            
             view?.addSubview(self.videoPlayerView!)
+            //--
+            self.videoPlayerView!.translatesAutoresizingMaskIntoConstraints = false
+            self.videoPlayerView!.topAnchor.constraint(equalTo: view!.safeAreaLayoutGuide.topAnchor).isActive = true
+            self.videoPlayerView!.leftAnchor.constraint(equalTo: view!.safeAreaLayoutGuide.leftAnchor).isActive = true
+            self.videoPlayerView!.widthAnchor.constraint(equalTo: view!.widthAnchor).isActive = true
+            self.videoPlayerView!.heightAnchor.constraint(equalToConstant: height).isActive = true
+            //--
+            
             keyWindow.addSubview(view!)
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -50,8 +57,4 @@ class VideoLauncher: NSObject {
         }
 
     }
-
-    
-
-    
 }
